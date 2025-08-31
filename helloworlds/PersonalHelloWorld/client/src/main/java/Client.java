@@ -8,7 +8,7 @@ public class Client {
     {
         try(Communicator communicator = Util.initialize(args))
         {
-            ObjectPrx base = communicator.stringToProxy("SimplePrinter:default -p 10000");
+            ObjectPrx base = communicator.stringToProxy("SimplePrinter:default -h 192.168.131.101 -p 10000");
             PrinterPrx printer = PrinterPrx.checkedCast(base);
             if(printer == null) {
                 throw new Error("Invalid proxy");
