@@ -1,9 +1,15 @@
 import Demo.Response;
 import Demo.PrinterPrx;
 
+import java.util.Scanner;
+
 import com.zeroc.Ice.Communicator;
 import com.zeroc.Ice.ObjectPrx;
 import com.zeroc.Ice.Util;
+
+import java.net.InetAddress;
+import java.io.IOException;
+
 
 public class Client {
     public static void main(String[] args) {
@@ -21,9 +27,30 @@ public class Client {
                 throw new Error("Invalid proxy");
             }
 
-            response = service.printString("Hello World from a remote client!");
+            Scanner scanner = new Scanner(System.in);
 
-            System.out.println("Respuesta del server: " + response.value + ", " + response.responseTime);
+            String username = System.getProperty("user.name");
+            String hostname = "unknown";
+
+            try {
+                hostname = InetAddress.getLocalHost().getHostName();
+            } catch (IOException e) {
+                System.err.println("Unable to get hostname: " + e.getMessage());
+            }
+
+
+            while(true){
+                System.out.println("Waiting for message...");
+                String message = scanner.nextLine();
+                response = service.printString(username+":"+hostname+" - "+message);
+                System.out.println("Server Response: " + response.value + ", " + response.responseTime);
+
+                if(message.equals("exit")){
+                    break;
+                }
+            }
+
+            scanner.close();
         }
     }
 }
