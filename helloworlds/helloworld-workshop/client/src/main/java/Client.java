@@ -9,9 +9,9 @@ public class Client {
     public static void main(String[] args) {
         java.util.List<String> extraArgs = new java.util.ArrayList<>();
 
-        try(Communicator communicator = Util.initialize(args,"config.client",extraArgs))
-        {
-            ObjectPrx base = communicator.stringToProxy("Printer.Proxy");
+        try(Communicator communicator = Util.initialize(args, extraArgs)) {
+            
+            ObjectPrx base = communicator.stringToProxy("SimplePrinter:default -p 9099");
 
             PrinterPrx service = PrinterPrx.checkedCast(base);
             

@@ -3,4 +3,4 @@
 # "Hello". The following line sets the endpoints for this
 # adapter.
 #
-Printer.Endpoints=tcp -p 9099
+Printer.Endpoints=default -p 9099
