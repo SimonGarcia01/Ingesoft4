@@ -1,0 +1,6 @@
+#
+# The server creates one single object adapter with the name
+# "Hello". The following line sets the endpoints for this
+# adapter.
+#
+Printer.Endpoints=default -p 9099
